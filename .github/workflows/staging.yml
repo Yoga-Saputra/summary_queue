@@ -1,0 +1,22 @@
+name: Deploy Summary
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  Deploy-to-Staging:
+    runs-on: ubuntu-latest
+
+    steps:    
+      - name: "Deploy Summary"
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/summary
+            ./script.sh
+      
